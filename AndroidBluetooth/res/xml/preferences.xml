@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+        <CheckBoxPreference android:title="Bluetooth On" android:key="bluetooth_on" android:summary="Turn bluetooth on or off."/>
+    </PreferenceScreen>

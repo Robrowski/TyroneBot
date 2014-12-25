@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="command_types">
+		<item >Squirt</item>
+		<item >Heartbeat</item>
+		<item >Status</item>
+		<item >LED</item>
+		<item >Screen</item>         
+    </string-array>
+    
+</resources>
