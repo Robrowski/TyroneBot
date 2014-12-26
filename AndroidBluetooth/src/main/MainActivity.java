@@ -15,12 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import bluetooth.BluetoothCommunications;
 
 import com.example.androidbluetooth.R;
 import com.example.settings.SettingsActivity;
 
 public class MainActivity extends ActionBarActivity {
-	private static final String APP_TAG = "AndroidBluetooth";
+	private final static String APP_TAG = "AndroidBluetooth";
+	private final BluetoothCommunications bc = new BluetoothCommunications();
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -59,6 +61,8 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		boolean bluetoothStatus = bc.initialize(this);
 		setContentView(R.layout.activity_main);
 
 		// Create the adapter that will return a fragment for each of the three
@@ -69,7 +73,6 @@ public class MainActivity extends ActionBarActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
-
 	}
 
 	/**
@@ -171,6 +174,19 @@ public class MainActivity extends ActionBarActivity {
 			}
 
 		}
+	}
+
+	/**
+	 * Very disappointing hack around to encapsulate bluetooth out of the
+	 * activity... Maybe I should make one landing activity to start up
+	 * bluetooth, then later initialize the control activities....
+	 * 
+	 * @param enableBtIntent
+	 * @param requestEnableBt
+	 */
+	public void startActivityForResult_public(Intent enableBtIntent,
+			int requestEnableBt) {
+		this.startActivityForResult(enableBtIntent, requestEnableBt);
 	}
 
 }
