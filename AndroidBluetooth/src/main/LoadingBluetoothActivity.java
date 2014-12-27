@@ -16,7 +16,6 @@ import android.widget.TextView;
 //TODO pass bluetooth communications on to next stage. 
 //// I SHOULD do 'BluetoothAdapter.getDefaultAdapter()" anywhere...
 
-// TODO disable back button to this activity
 /**
  * View to show of the bluetooth setup
  * 
@@ -98,6 +97,7 @@ public class LoadingBluetoothActivity extends Activity {
 			// Change the view over to MainActivity
 			if (bluetoothReady()) {
 				startActivity(new Intent(this, MainActivity.class));
+				finish();
 			}
 		}
 	}

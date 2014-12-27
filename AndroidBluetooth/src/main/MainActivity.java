@@ -22,6 +22,8 @@ import com.example.settings.SettingsActivity;
 
 public class MainActivity extends ActionBarActivity {
 	private final static String APP_TAG = "AndroidBluetooth";
+	private final static int num_pages = 4;
+	private final static int page_mult = 1;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -43,13 +45,7 @@ public class MainActivity extends ActionBarActivity {
 		}
 	}
 
-	/**
-	 * The {@link android.support.v4.view.PagerAdapter} that will provide
-	 * fragments for each of the sections. We use a {@link FragmentPagerAdapter}
-	 * derivative, which will keep every loaded fragment in memory. If this
-	 * becomes too memory intensive, it may be best to switch to a
-	 * {@link android.support.v4.app.FragmentStatePagerAdapter}.
-	 */
+	/** Handles page swiping */
 	SectionsPagerAdapter mSectionsPagerAdapter;
 
 	/**
@@ -71,6 +67,7 @@ public class MainActivity extends ActionBarActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+		// mViewPager.setCurrentItem(num_pages * page_mult / 2);
 	}
 
 	/**
@@ -88,20 +85,20 @@ public class MainActivity extends ActionBarActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
-			return PlaceholderFragment.newInstance(position);
+			int new_pos = (position % num_pages); // + num_pages * 3;
+			return PlaceholderFragment.newInstance(new_pos);
 		}
 
 		@Override
 		public int getCount() {
-			// TODO : make this pager wrap around
-			return 4;
+			return num_pages * page_mult;
 		}
 
 		@Override
 		public CharSequence getPageTitle(int position) {
 			// TODO: What is this for?
 			Locale l = Locale.getDefault();
-			switch (position) {
+			switch (position % num_pages) {
 			case 0:
 				return getString(R.string.title_section1).toUpperCase(l);
 			case 1:
@@ -132,7 +129,7 @@ public class MainActivity extends ActionBarActivity {
 		public static PlaceholderFragment newInstance(int sectionNumber) {
 			PlaceholderFragment fragment = new PlaceholderFragment();
 			Bundle args = new Bundle();
-			args.putInt(ARG_SECTION_NUMBER, sectionNumber);
+			args.putInt(ARG_SECTION_NUMBER, sectionNumber % num_pages);
 			fragment.setArguments(args);
 			return fragment;
 		}
@@ -146,8 +143,6 @@ public class MainActivity extends ActionBarActivity {
 		@Override
 		public void onCreate(Bundle savedInstanceState) {
 			super.onCreate(savedInstanceState);
-			// TODO Why is the data taken this way and not directly from the
-			// savedInstanceState?
 			page_num = getArguments() != null ? getArguments().getInt(
 					ARG_SECTION_NUMBER) : 1;
 		}
