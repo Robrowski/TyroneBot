@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
@@ -15,14 +16,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import bluetooth.BluetoothCommunications;
 
 import com.example.androidbluetooth.R;
 import com.example.settings.SettingsActivity;
 
 public class MainActivity extends ActionBarActivity {
 	private final static String APP_TAG = "AndroidBluetooth";
-	private final BluetoothCommunications bc = new BluetoothCommunications();
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -62,7 +61,6 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		boolean bluetoothStatus = bc.initialize(this);
 		setContentView(R.layout.activity_main);
 
 		// Create the adapter that will return a fragment for each of the three
@@ -79,7 +77,7 @@ public class MainActivity extends ActionBarActivity {
 	 * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
 	 * one of the sections/tabs/pages.
 	 */
-	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+	public class SectionsPagerAdapter extends FragmentStatePagerAdapter {
 
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
@@ -174,19 +172,6 @@ public class MainActivity extends ActionBarActivity {
 			}
 
 		}
-	}
-
-	/**
-	 * Very disappointing hack around to encapsulate bluetooth out of the
-	 * activity... Maybe I should make one landing activity to start up
-	 * bluetooth, then later initialize the control activities....
-	 * 
-	 * @param enableBtIntent
-	 * @param requestEnableBt
-	 */
-	public void startActivityForResult_public(Intent enableBtIntent,
-			int requestEnableBt) {
-		this.startActivityForResult(enableBtIntent, requestEnableBt);
 	}
 
 }
