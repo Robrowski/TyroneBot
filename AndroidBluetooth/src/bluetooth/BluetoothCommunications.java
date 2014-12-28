@@ -2,9 +2,9 @@ package bluetooth;
 
 import java.util.Set;
 
+import logger.Log;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.util.Log;
 
 public class BluetoothCommunications {
 	private final static String APP_TAG = "AndroidBluetooth";
@@ -31,5 +31,4 @@ public class BluetoothCommunications {
 		pairedDevices = mBA.getBondedDevices();
 		Log.d(APP_TAG, "Aquired bonded devices");
 	}
-
 }
