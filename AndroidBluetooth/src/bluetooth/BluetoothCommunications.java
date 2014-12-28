@@ -2,7 +2,7 @@ package bluetooth;
 
 import java.util.Set;
 
-import logger.Log;
+import logging.Log;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 

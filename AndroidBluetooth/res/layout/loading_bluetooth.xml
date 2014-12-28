@@ -6,7 +6,7 @@
     
      <fragment
          android:id="@+id/log_fragment"
-         android:name="view.LogFragment" 
+         android:name="logging.view.LogFragment" 
          android:layout_width="match_parent"
          android:layout_height="395dp" />
 

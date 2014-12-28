@@ -1,12 +1,11 @@
 package main;
 
-import impl.LogWrapper;
-import impl.MessageOnlyLogFilter;
-
 import java.util.Set;
 
-import logger.Log;
-import view.LogFragment;
+import logging.Log;
+import logging.impl.LogWrapper;
+import logging.impl.MessageOnlyLogFilter;
+import logging.view.LogFragment;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
