@@ -3,6 +3,7 @@ package main;
 import java.util.Locale;
 
 import logging.Log;
+import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -16,14 +17,24 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import bluetooth.DeviceListActivity;
 
 import com.example.androidbluetooth.R;
 import com.example.settings.SettingsActivity;
+
+// TODO abstract out the parts that let this scroll and stuff
 
 public class MainActivity extends ActionBarActivity {
 	private final static String APP_TAG = "AndroidBluetooth";
 	private final static int num_pages = 4;
 	private final static int page_mult = 1;
+
+	// Intent request codes // TODO are these arbitrary?
+	private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
+	private static final int REQUEST_CONNECT_DEVICE_INSECURE = 2;
+	private static final int REQUEST_ENABLE_BT = 3;
+
+	private BluetoothAdapter mBA;
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,10 +47,29 @@ public class MainActivity extends ActionBarActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle item selection
 		switch (item.getItemId()) {
-		case R.id.action_settings:
+		case R.id.action_settings: {
 			Intent intent = new Intent(this, SettingsActivity.class);
 			startActivity(intent);
 			return true;
+		}
+		case R.id.secure_connect_scan: {
+			// Launch the DeviceListActivity to see devices and do scan
+			Intent serverIntent = new Intent(this, DeviceListActivity.class);
+			startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
+			return true;
+		}
+		case R.id.insecure_connect_scan: {
+			// Launch the DeviceListActivity to see devices and do scan
+			Intent serverIntent = new Intent(this, DeviceListActivity.class);
+			startActivityForResult(serverIntent,
+					REQUEST_CONNECT_DEVICE_INSECURE);
+			return true;
+		}
+		case R.id.discoverable: {
+			// Ensure this device is discoverable by others
+			ensureDiscoverable();
+			return true;
+		}
 		default:
 			return super.onOptionsItemSelected(item);
 		}
@@ -56,8 +86,8 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.activity_main);
+		mBA = BluetoothAdapter.getDefaultAdapter();
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
@@ -166,6 +196,19 @@ public class MainActivity extends ActionBarActivity {
 						false);
 			}
 
+		}
+	}
+
+	/**
+	 * Makes this device discoverable.
+	 */
+	private void ensureDiscoverable() {
+		if (mBA.getScanMode() != BluetoothAdapter.SCAN_MODE_CONNECTABLE_DISCOVERABLE) {
+			Intent discoverableIntent = new Intent(
+					BluetoothAdapter.ACTION_REQUEST_DISCOVERABLE);
+			discoverableIntent.putExtra(
+					BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);
+			startActivity(discoverableIntent);
 		}
 	}
 
