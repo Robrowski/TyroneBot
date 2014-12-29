@@ -2,7 +2,6 @@ package main;
 
 import java.util.Locale;
 
-import activity.AbstractPlaceholderFragment;
 import activity.ScrollableActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
@@ -109,19 +108,20 @@ public class MainActivity extends ScrollableActivity {
 	}
 
 	@Override
-	public AbstractPlaceholderFragment newPlaceholderFragmentInstance(
-			int position) {
-		return PlaceholderFragment.newInstance(position);
-	}
-
-	@Override
 	protected int getPagerID() {
 		return R.id.pager;
 	}
 
 	@Override
-	protected int getLayoutId() {
+	protected int getMainLayoutId() {
 		return R.layout.activity_main;
+	}
+
+	@Override
+	protected int[] getLayouts() {
+		int[] layouts = { R.layout.squirt_control, R.layout.fragment_main,
+				R.layout.fragment_main, R.layout.fragment_main };
+		return layouts;
 	}
 
 }
