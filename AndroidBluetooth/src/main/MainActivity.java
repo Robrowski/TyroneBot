@@ -13,8 +13,6 @@ import bluetooth.DeviceListActivity;
 import com.example.androidbluetooth.R;
 import com.example.settings.SettingsActivity;
 
-// TODO abstract out the parts that let this scroll and stuff
-
 public class MainActivity extends ScrollableActivity {
 	private final static String APP_TAG = "AndroidBluetooth";
 	private final static int num_pages = 4;
@@ -30,7 +28,7 @@ public class MainActivity extends ScrollableActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
