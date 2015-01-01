@@ -117,7 +117,7 @@ public class MainActivity extends ScrollableActivity {
 
 	@Override
 	protected int[] getLayouts() {
-		int[] layouts = { R.layout.squirt_control, R.layout.fragment_main,
+		int[] layouts = { R.layout.squirt_control, R.layout.activity_main,
 				R.layout.fragment_main, R.layout.fragment_main };
 		return layouts;
 	}

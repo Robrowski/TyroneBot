@@ -141,19 +141,15 @@ public class LoadingBluetoothActivity extends Activity {
 	/** Create a chain of targets that will receive log data */
 	public void initializeLogging() {
 		// Wraps Android's native log framework.
-		LogWrapper logWrapper = new LogWrapper();
-		// Using Log, front-end to the logging chain, emulates android.util.log
-		// method signatures.
-		Log.setLogNode(logWrapper);
+		Log.setLast(new LogWrapper());
 
 		// Filter strips out everything except the message text.
-		MessageOnlyLogFilter msgFilter = new MessageOnlyLogFilter();
-		logWrapper.setNext(msgFilter);
+		Log.setLast(new MessageOnlyLogFilter());
 
 		// On screen logging via a fragment with a TextView.
 		LogFragment logFragment = (LogFragment) getFragmentManager()
 				.findFragmentById(R.id.log_fragment);
-		msgFilter.setNext(logFragment.getLogView());
+		Log.setLast(logFragment.getLogView());
 
 		Log.i(APP_TAG, "Ready");
 	}
