@@ -153,5 +153,4 @@ public class LoadingBluetoothActivity extends Activity {
 
 		Log.i(APP_TAG, "Ready");
 	}
-
 }

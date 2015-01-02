@@ -2,10 +2,13 @@ package main;
 
 import java.util.Locale;
 
+import logging.Log;
+import logging.view.LogSupportFragment;
 import activity.ScrollableActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
 import bluetooth.DeviceListActivity;
@@ -33,6 +36,7 @@ public class MainActivity extends ScrollableActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Log.w(APP_TAG, "Handling menu item..");
 		// Handle item selection
 		switch (item.getItemId()) {
 		case R.id.action_settings: {
@@ -67,7 +71,10 @@ public class MainActivity extends ScrollableActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		mBA = BluetoothAdapter.getDefaultAdapter();
-
+		// On screen logging via a fragment with a TextView.
+		LogSupportFragment logFragment = (LogSupportFragment) getSupportFragmentManager()
+				.findFragmentById(R.id.log_fragment2);
+		Log.setLast(logFragment.getLogView());
 	}
 
 	/**
@@ -116,10 +123,14 @@ public class MainActivity extends ScrollableActivity {
 	}
 
 	@Override
-	protected int[] getLayouts() {
-		int[] layouts = { R.layout.squirt_control, R.layout.activity_main,
-				R.layout.fragment_main, R.layout.fragment_main };
-		return layouts;
+	protected Fragment getFragments(int position) {
+		// switch (position) {
+		// case 1:
+		// return (Fragment) new LogSupportFragment();
+		//
+		// }
+		return new PlaceholderFragment(position);
+
 	}
 
 }
