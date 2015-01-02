@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
     <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-        <EditTextPreference android:title="Baud Rate" android:summary="Set the baud rate for communication." android:defaultValue="9600" android:key="baud_rate"/>
+        <EditTextPreference android:title="Baud Rate" android:summary="Set the baud rate for communication." android:defaultValue="57600" android:key="baud_rate"/>
     </PreferenceScreen>

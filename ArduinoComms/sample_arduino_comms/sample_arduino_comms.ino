@@ -1,4 +1,4 @@
-#include <NewSoftSerial.h>
+#include <SoftwareSerial.h>
 #include <LiquidCrystal.h>
 
 /* 
@@ -80,7 +80,7 @@ LiquidCrystal lcd(9, 8, 7, 6, 5, 4);
   To change from 115k default baud, using hyperterminal, 
   put the Bluetooth modem in "command" mode ($$$) and change to 57.6k BAUD (su,57).  Get back in "data" mode (---) for Arduino to communicate with the BlueSMiRF Gold.
 */
-NewSoftSerial nss(2, 3); // (RX, TX)
+SoftwareSerial nss(2, 3); // (RX, TX)
 
 // **************** these are variables and constants for sending a test message from Arduino to the Android device
 // the interval to send a pre-defined message from Arduino to the Droid
@@ -105,10 +105,10 @@ void setup()
   //clear parallel LCD and set the cursor to the first row, first column.
   lcd.clear();
   lcd.setCursor(0, 0);
-
+  lcd.print("Waiting for bt..");
   //reset the timer so we can send a message to the Droid in "chatInterval" seconds from now (30 seconds unless you change it in initialization above)
   lastChatSendTime = millis(); 
-
+  
 }
 
 void loop()
@@ -116,7 +116,7 @@ void loop()
   //*************receiving a message from Android and printing on Arduino************************* 
   if (nss.available()) 
    {
-     lcd.print(nss.read(), BYTE); //get message from Android device on the Arduino NewSoftSerial serial port and print it out on the LCD
+     lcd.print(nss.read()); //get message from Android device on the Arduino NewSoftSerial serial port and print it out on the LCD
    }
 
    //*************sending a message from Arduino to Android *************************   
