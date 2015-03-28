@@ -54,7 +54,7 @@ public abstract class ScrollableActivity extends ActionBarActivity {
 
 	/**
 	 * Getter for the main layout ID used in this framework
-	 * 
+	 *
 	 * @return
 	 */
 	abstract protected int getMainLayoutId();
@@ -62,6 +62,7 @@ public abstract class ScrollableActivity extends ActionBarActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        // This must be called first to prevent crashing
 		setContentView(getMainLayoutId());
 
 		// Create the adapter that will return a fragment for each of the

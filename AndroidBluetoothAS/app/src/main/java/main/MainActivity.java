@@ -1,20 +1,21 @@
 package main;
 
-import java.util.Locale;
-
-import logging.Log;
-import logging.view.LogSupportFragment;
-import activity.ScrollableActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Menu;
 import android.view.MenuItem;
-import bluetooth.DeviceListActivity;
 
 import com.example.androidbluetooth.R;
 import com.example.settings.SettingsActivity;
+
+import java.util.Locale;
+
+import activity.ScrollableActivity;
+import bluetooth.DeviceListActivity;
+import logging.Log;
+import logging.view.LogSupportFragment;
 
 public class MainActivity extends ScrollableActivity {
 	private final static String APP_TAG = "AndroidBluetooth";
@@ -70,7 +71,8 @@ public class MainActivity extends ScrollableActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		mBA = BluetoothAdapter.getDefaultAdapter();
+
+        mBA = BluetoothAdapter.getDefaultAdapter();
 		// On screen logging via a fragment with a TextView.
 		LogSupportFragment logFragment = (LogSupportFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.log_fragment2);
@@ -133,4 +135,10 @@ public class MainActivity extends ScrollableActivity {
 
 	}
 
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        Log.w(APP_TAG, "Activity resumed!");
+    }
 }
