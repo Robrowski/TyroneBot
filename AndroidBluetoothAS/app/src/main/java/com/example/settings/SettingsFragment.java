@@ -3,9 +3,10 @@
  */
 package com.example.settings;
 
-import android.R;
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
+
+import com.example.androidbluetooth.R;
 
 public class SettingsFragment extends PreferenceFragment {
 	@Override
