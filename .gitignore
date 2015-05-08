@@ -317,3 +317,6 @@ hs_err_pid*
 ##############
 workspace.xml
 
+# Android studio user specific files
+*/.idea/workspace.xml
+*/.idea/libraries

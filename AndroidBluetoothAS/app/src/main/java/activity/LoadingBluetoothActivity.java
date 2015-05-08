@@ -1,11 +1,5 @@
-package main;
+package activity;
 
-import java.util.Set;
-
-import logging.Log;
-import logging.impl.LogWrapper;
-import logging.impl.MessageOnlyLogFilter;
-import logging.view.LogFragment;
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -13,6 +7,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.androidbluetooth.R;
+
+import java.util.Set;
+
+import logging.Log;
+import logging.impl.LogWrapper;
+import logging.impl.MessageOnlyLogFilter;
+import logging.view.LogFragment;
 
 //TODO pass bluetooth communications on to next stage. 
 //// I SHOULD do 'BluetoothAdapter.getDefaultAdapter()" anywhere...
@@ -97,7 +98,7 @@ public class LoadingBluetoothActivity extends Activity {
 
 			// Change the view over to MainActivity
 			if (bluetoothReady()) {
-				startActivity(new Intent(this, MainActivity.class));
+				startActivity(new Intent(this, ControlActivity.class));
 				finish();
 			}
 		}
